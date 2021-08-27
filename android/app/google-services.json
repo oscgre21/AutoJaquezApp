@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "446254365739",
+    "project_id": "autojaquezpp",
+    "storage_bucket": "autojaquezpp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446254365739:android:a7c3c1a822d12a2e54be6e",
+        "android_client_info": {
+          "package_name": "com.oscgre.autojaquez"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446254365739-5kkgcfunjovp0m7sf63lchfkr4i8vivl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.oscgre.autojaquez",
+            "certificate_hash": "59fface1ed93e1c2de2eb96740b4d2765ed486e2"
+          }
+        },
+        {
+          "client_id": "446254365739-u6naj0mrgfbqj92fnduose3j8ek4gflc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBggix6UJ5hNkBbO-cdGhRC7bI-eA0LbuE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446254365739-u6naj0mrgfbqj92fnduose3j8ek4gflc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
