@@ -18,11 +18,33 @@ Either<ValueFailure<String>, String> validateEmailAddress(String input) {
 
 Either<ValueFailure<String>, String> validatePassword(String input) {
   if (input.isEmpty) {
-    return left(ValueFailure.passwordIsEmpty(failedValue: input));
+    return left(ValueFailure.invalidPhoneNumber(failedValue: input));
   }
   if (input.length > 5) {
     return right(input);
   } else {
     return left(ValueFailure.shortPassword(failedValue: input));
+  }
+}
+
+Either<ValueFailure<String>, String> validateLength(String input, int size) {
+  if (input.isEmpty) {
+    return left(ValueFailure.inputIsEmpty(failedValue: input));
+  }
+  if (input.length > size) {
+    return right(input);
+  } else {
+    return left(ValueFailure.shortInputText(failedValue: input));
+  }
+}
+
+Either<ValueFailure<String>, String> validateNumber(String input, int size) {
+  if (input.isEmpty) {
+    return left(ValueFailure.invalidPhoneNumber(failedValue: input));
+  }
+  if (input.length > size) {
+    return right(input);
+  } else {
+    return left(ValueFailure.shortInputText(failedValue: input));
   }
 }

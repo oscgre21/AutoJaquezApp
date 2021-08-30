@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
-part of 'auth_bloc.dart';
+part of 'testbloc_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,97 +13,89 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$AuthEventTearOff {
-  const _$AuthEventTearOff();
+class _$TestblocEventTearOff {
+  const _$TestblocEventTearOff();
 
-  AuthCheckRequest authCheckRequest() {
-    return const AuthCheckRequest();
-  }
-
-  SignedOut signedOut() {
-    return const SignedOut();
+  _Started started() {
+    return const _Started();
   }
 }
 
 /// @nodoc
-const $AuthEvent = _$AuthEventTearOff();
+const $TestblocEvent = _$TestblocEventTearOff();
 
 /// @nodoc
-mixin _$AuthEvent {
+mixin _$TestblocEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() authCheckRequest,
-    required TResult Function() signedOut,
+    required TResult Function() started,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? authCheckRequest,
-    TResult Function()? signedOut,
+    TResult Function()? started,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(AuthCheckRequest value) authCheckRequest,
-    required TResult Function(SignedOut value) signedOut,
+    required TResult Function(_Started value) started,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthCheckRequest value)? authCheckRequest,
-    TResult Function(SignedOut value)? signedOut,
+    TResult Function(_Started value)? started,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AuthEventCopyWith<$Res> {
-  factory $AuthEventCopyWith(AuthEvent value, $Res Function(AuthEvent) then) =
-      _$AuthEventCopyWithImpl<$Res>;
+abstract class $TestblocEventCopyWith<$Res> {
+  factory $TestblocEventCopyWith(
+          TestblocEvent value, $Res Function(TestblocEvent) then) =
+      _$TestblocEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$AuthEventCopyWithImpl<$Res> implements $AuthEventCopyWith<$Res> {
-  _$AuthEventCopyWithImpl(this._value, this._then);
+class _$TestblocEventCopyWithImpl<$Res>
+    implements $TestblocEventCopyWith<$Res> {
+  _$TestblocEventCopyWithImpl(this._value, this._then);
 
-  final AuthEvent _value;
+  final TestblocEvent _value;
   // ignore: unused_field
-  final $Res Function(AuthEvent) _then;
+  final $Res Function(TestblocEvent) _then;
 }
 
 /// @nodoc
-abstract class $AuthCheckRequestCopyWith<$Res> {
-  factory $AuthCheckRequestCopyWith(
-          AuthCheckRequest value, $Res Function(AuthCheckRequest) then) =
-      _$AuthCheckRequestCopyWithImpl<$Res>;
+abstract class _$StartedCopyWith<$Res> {
+  factory _$StartedCopyWith(_Started value, $Res Function(_Started) then) =
+      __$StartedCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$AuthCheckRequestCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
-    implements $AuthCheckRequestCopyWith<$Res> {
-  _$AuthCheckRequestCopyWithImpl(
-      AuthCheckRequest _value, $Res Function(AuthCheckRequest) _then)
-      : super(_value, (v) => _then(v as AuthCheckRequest));
+class __$StartedCopyWithImpl<$Res> extends _$TestblocEventCopyWithImpl<$Res>
+    implements _$StartedCopyWith<$Res> {
+  __$StartedCopyWithImpl(_Started _value, $Res Function(_Started) _then)
+      : super(_value, (v) => _then(v as _Started));
 
   @override
-  AuthCheckRequest get _value => super._value as AuthCheckRequest;
+  _Started get _value => super._value as _Started;
 }
 
 /// @nodoc
 
-class _$AuthCheckRequest implements AuthCheckRequest {
-  const _$AuthCheckRequest();
+class _$_Started implements _Started {
+  const _$_Started();
 
   @override
   String toString() {
-    return 'AuthEvent.authCheckRequest()';
+    return 'TestblocEvent.started()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is AuthCheckRequest);
+    return identical(this, other) || (other is _Started);
   }
 
   @override
@@ -112,21 +104,19 @@ class _$AuthCheckRequest implements AuthCheckRequest {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() authCheckRequest,
-    required TResult Function() signedOut,
+    required TResult Function() started,
   }) {
-    return authCheckRequest();
+    return started();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? authCheckRequest,
-    TResult Function()? signedOut,
+    TResult Function()? started,
     required TResult orElse(),
   }) {
-    if (authCheckRequest != null) {
-      return authCheckRequest();
+    if (started != null) {
+      return started();
     }
     return orElse();
   }
@@ -134,119 +124,36 @@ class _$AuthCheckRequest implements AuthCheckRequest {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(AuthCheckRequest value) authCheckRequest,
-    required TResult Function(SignedOut value) signedOut,
+    required TResult Function(_Started value) started,
   }) {
-    return authCheckRequest(this);
+    return started(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthCheckRequest value)? authCheckRequest,
-    TResult Function(SignedOut value)? signedOut,
+    TResult Function(_Started value)? started,
     required TResult orElse(),
   }) {
-    if (authCheckRequest != null) {
-      return authCheckRequest(this);
+    if (started != null) {
+      return started(this);
     }
     return orElse();
   }
 }
 
-abstract class AuthCheckRequest implements AuthEvent {
-  const factory AuthCheckRequest() = _$AuthCheckRequest;
+abstract class _Started implements TestblocEvent {
+  const factory _Started() = _$_Started;
 }
 
 /// @nodoc
-abstract class $SignedOutCopyWith<$Res> {
-  factory $SignedOutCopyWith(SignedOut value, $Res Function(SignedOut) then) =
-      _$SignedOutCopyWithImpl<$Res>;
-}
+class _$TestblocStateTearOff {
+  const _$TestblocStateTearOff();
 
-/// @nodoc
-class _$SignedOutCopyWithImpl<$Res> extends _$AuthEventCopyWithImpl<$Res>
-    implements $SignedOutCopyWith<$Res> {
-  _$SignedOutCopyWithImpl(SignedOut _value, $Res Function(SignedOut) _then)
-      : super(_value, (v) => _then(v as SignedOut));
-
-  @override
-  SignedOut get _value => super._value as SignedOut;
-}
-
-/// @nodoc
-
-class _$SignedOut implements SignedOut {
-  const _$SignedOut();
-
-  @override
-  String toString() {
-    return 'AuthEvent.signedOut()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is SignedOut);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() authCheckRequest,
-    required TResult Function() signedOut,
-  }) {
-    return signedOut();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? authCheckRequest,
-    TResult Function()? signedOut,
-    required TResult orElse(),
-  }) {
-    if (signedOut != null) {
-      return signedOut();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(AuthCheckRequest value) authCheckRequest,
-    required TResult Function(SignedOut value) signedOut,
-  }) {
-    return signedOut(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(AuthCheckRequest value)? authCheckRequest,
-    TResult Function(SignedOut value)? signedOut,
-    required TResult orElse(),
-  }) {
-    if (signedOut != null) {
-      return signedOut(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class SignedOut implements AuthEvent {
-  const factory SignedOut() = _$SignedOut;
-}
-
-/// @nodoc
-class _$AuthStateTearOff {
-  const _$AuthStateTearOff();
-
-  _AuthState call() {
-    return const _AuthState();
+  _TestblocState call({required bool isAuth}) {
+    return _TestblocState(
+      isAuth: isAuth,
+    );
   }
 
   Authenticated authenticated() {
@@ -259,20 +166,20 @@ class _$AuthStateTearOff {
 }
 
 /// @nodoc
-const $AuthState = _$AuthStateTearOff();
+const $TestblocState = _$TestblocStateTearOff();
 
 /// @nodoc
-mixin _$AuthState {
+mixin _$TestblocState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function() $default, {
+    TResult Function(bool isAuth) $default, {
     required TResult Function() authenticated,
     required TResult Function() unauthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function()? $default, {
+    TResult Function(bool isAuth)? $default, {
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
@@ -280,14 +187,14 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_AuthState value) $default, {
+    TResult Function(_TestblocState value) $default, {
     required TResult Function(Authenticated value) authenticated,
     required TResult Function(Unuthenticated value) unauthenticated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_AuthState value)? $default, {
+    TResult Function(_TestblocState value)? $default, {
     TResult Function(Authenticated value)? authenticated,
     TResult Function(Unuthenticated value)? unauthenticated,
     required TResult orElse(),
@@ -296,75 +203,104 @@ mixin _$AuthState {
 }
 
 /// @nodoc
-abstract class $AuthStateCopyWith<$Res> {
-  factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
-      _$AuthStateCopyWithImpl<$Res>;
+abstract class $TestblocStateCopyWith<$Res> {
+  factory $TestblocStateCopyWith(
+          TestblocState value, $Res Function(TestblocState) then) =
+      _$TestblocStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$AuthStateCopyWithImpl<$Res> implements $AuthStateCopyWith<$Res> {
-  _$AuthStateCopyWithImpl(this._value, this._then);
+class _$TestblocStateCopyWithImpl<$Res>
+    implements $TestblocStateCopyWith<$Res> {
+  _$TestblocStateCopyWithImpl(this._value, this._then);
 
-  final AuthState _value;
+  final TestblocState _value;
   // ignore: unused_field
-  final $Res Function(AuthState) _then;
+  final $Res Function(TestblocState) _then;
 }
 
 /// @nodoc
-abstract class _$AuthStateCopyWith<$Res> {
-  factory _$AuthStateCopyWith(
-          _AuthState value, $Res Function(_AuthState) then) =
-      __$AuthStateCopyWithImpl<$Res>;
+abstract class _$TestblocStateCopyWith<$Res> {
+  factory _$TestblocStateCopyWith(
+          _TestblocState value, $Res Function(_TestblocState) then) =
+      __$TestblocStateCopyWithImpl<$Res>;
+  $Res call({bool isAuth});
 }
 
 /// @nodoc
-class __$AuthStateCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
-    implements _$AuthStateCopyWith<$Res> {
-  __$AuthStateCopyWithImpl(_AuthState _value, $Res Function(_AuthState) _then)
-      : super(_value, (v) => _then(v as _AuthState));
+class __$TestblocStateCopyWithImpl<$Res>
+    extends _$TestblocStateCopyWithImpl<$Res>
+    implements _$TestblocStateCopyWith<$Res> {
+  __$TestblocStateCopyWithImpl(
+      _TestblocState _value, $Res Function(_TestblocState) _then)
+      : super(_value, (v) => _then(v as _TestblocState));
 
   @override
-  _AuthState get _value => super._value as _AuthState;
+  _TestblocState get _value => super._value as _TestblocState;
+
+  @override
+  $Res call({
+    Object? isAuth = freezed,
+  }) {
+    return _then(_TestblocState(
+      isAuth: isAuth == freezed
+          ? _value.isAuth
+          : isAuth // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_AuthState implements _AuthState {
-  const _$_AuthState();
+class _$_TestblocState implements _TestblocState {
+  const _$_TestblocState({required this.isAuth});
+
+  @override
+  final bool isAuth;
 
   @override
   String toString() {
-    return 'AuthState()';
+    return 'TestblocState(isAuth: $isAuth)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _AuthState);
+    return identical(this, other) ||
+        (other is _TestblocState &&
+            (identical(other.isAuth, isAuth) ||
+                const DeepCollectionEquality().equals(other.isAuth, isAuth)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(isAuth);
+
+  @JsonKey(ignore: true)
+  @override
+  _$TestblocStateCopyWith<_TestblocState> get copyWith =>
+      __$TestblocStateCopyWithImpl<_TestblocState>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function() $default, {
+    TResult Function(bool isAuth) $default, {
     required TResult Function() authenticated,
     required TResult Function() unauthenticated,
   }) {
-    return $default();
+    return $default(isAuth);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function()? $default, {
+    TResult Function(bool isAuth)? $default, {
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
   }) {
     if ($default != null) {
-      return $default();
+      return $default(isAuth);
     }
     return orElse();
   }
@@ -372,7 +308,7 @@ class _$_AuthState implements _AuthState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_AuthState value) $default, {
+    TResult Function(_TestblocState value) $default, {
     required TResult Function(Authenticated value) authenticated,
     required TResult Function(Unuthenticated value) unauthenticated,
   }) {
@@ -382,7 +318,7 @@ class _$_AuthState implements _AuthState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_AuthState value)? $default, {
+    TResult Function(_TestblocState value)? $default, {
     TResult Function(Authenticated value)? authenticated,
     TResult Function(Unuthenticated value)? unauthenticated,
     required TResult orElse(),
@@ -394,8 +330,13 @@ class _$_AuthState implements _AuthState {
   }
 }
 
-abstract class _AuthState implements AuthState {
-  const factory _AuthState() = _$_AuthState;
+abstract class _TestblocState implements TestblocState {
+  const factory _TestblocState({required bool isAuth}) = _$_TestblocState;
+
+  bool get isAuth => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$TestblocStateCopyWith<_TestblocState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -406,7 +347,8 @@ abstract class $AuthenticatedCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AuthenticatedCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+class _$AuthenticatedCopyWithImpl<$Res>
+    extends _$TestblocStateCopyWithImpl<$Res>
     implements $AuthenticatedCopyWith<$Res> {
   _$AuthenticatedCopyWithImpl(
       Authenticated _value, $Res Function(Authenticated) _then)
@@ -423,7 +365,7 @@ class _$Authenticated implements Authenticated {
 
   @override
   String toString() {
-    return 'AuthState.authenticated()';
+    return 'TestblocState.authenticated()';
   }
 
   @override
@@ -437,7 +379,7 @@ class _$Authenticated implements Authenticated {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function() $default, {
+    TResult Function(bool isAuth) $default, {
     required TResult Function() authenticated,
     required TResult Function() unauthenticated,
   }) {
@@ -447,7 +389,7 @@ class _$Authenticated implements Authenticated {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function()? $default, {
+    TResult Function(bool isAuth)? $default, {
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
@@ -461,7 +403,7 @@ class _$Authenticated implements Authenticated {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_AuthState value) $default, {
+    TResult Function(_TestblocState value) $default, {
     required TResult Function(Authenticated value) authenticated,
     required TResult Function(Unuthenticated value) unauthenticated,
   }) {
@@ -471,7 +413,7 @@ class _$Authenticated implements Authenticated {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_AuthState value)? $default, {
+    TResult Function(_TestblocState value)? $default, {
     TResult Function(Authenticated value)? authenticated,
     TResult Function(Unuthenticated value)? unauthenticated,
     required TResult orElse(),
@@ -483,7 +425,7 @@ class _$Authenticated implements Authenticated {
   }
 }
 
-abstract class Authenticated implements AuthState {
+abstract class Authenticated implements TestblocState {
   const factory Authenticated() = _$Authenticated;
 }
 
@@ -495,7 +437,8 @@ abstract class $UnuthenticatedCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UnuthenticatedCopyWithImpl<$Res> extends _$AuthStateCopyWithImpl<$Res>
+class _$UnuthenticatedCopyWithImpl<$Res>
+    extends _$TestblocStateCopyWithImpl<$Res>
     implements $UnuthenticatedCopyWith<$Res> {
   _$UnuthenticatedCopyWithImpl(
       Unuthenticated _value, $Res Function(Unuthenticated) _then)
@@ -512,7 +455,7 @@ class _$Unuthenticated implements Unuthenticated {
 
   @override
   String toString() {
-    return 'AuthState.unauthenticated()';
+    return 'TestblocState.unauthenticated()';
   }
 
   @override
@@ -526,7 +469,7 @@ class _$Unuthenticated implements Unuthenticated {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function() $default, {
+    TResult Function(bool isAuth) $default, {
     required TResult Function() authenticated,
     required TResult Function() unauthenticated,
   }) {
@@ -536,7 +479,7 @@ class _$Unuthenticated implements Unuthenticated {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function()? $default, {
+    TResult Function(bool isAuth)? $default, {
     TResult Function()? authenticated,
     TResult Function()? unauthenticated,
     required TResult orElse(),
@@ -550,7 +493,7 @@ class _$Unuthenticated implements Unuthenticated {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_AuthState value) $default, {
+    TResult Function(_TestblocState value) $default, {
     required TResult Function(Authenticated value) authenticated,
     required TResult Function(Unuthenticated value) unauthenticated,
   }) {
@@ -560,7 +503,7 @@ class _$Unuthenticated implements Unuthenticated {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_AuthState value)? $default, {
+    TResult Function(_TestblocState value)? $default, {
     TResult Function(Authenticated value)? authenticated,
     TResult Function(Unuthenticated value)? unauthenticated,
     required TResult orElse(),
@@ -572,6 +515,6 @@ class _$Unuthenticated implements Unuthenticated {
   }
 }
 
-abstract class Unuthenticated implements AuthState {
+abstract class Unuthenticated implements TestblocState {
   const factory Unuthenticated() = _$Unuthenticated;
 }

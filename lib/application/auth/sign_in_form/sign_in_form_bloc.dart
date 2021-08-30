@@ -1,3 +1,4 @@
+import 'package:autojaquezapp/domain/core/value_objects.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -33,10 +34,51 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
           authFailureOrSuccessOption: none(),
         );
       },
-      registerWithEmailAndPasswordPressed: (e) async* {
-        yield* _performActionOnAuthFacadeWithEmailAndPassword(
-          _authRepo.registerWithEmailAndPassword,
+      phoneChanged: (e) async* {
+        yield state.copyWith(
+          phone: PhoneNumber(e.phoneNumber),
+          authFailureOrSuccessOption: none(),
         );
+      },
+      nameChanged: (e) async* {
+        yield state.copyWith(
+          name: InputName(e.nameLastname),
+          authFailureOrSuccessOption: none(),
+        );
+      },
+      registerWithEmailAndPasswordPressed: (e) async* {
+        /* This process you can register by rest Api application */
+        Either<IAuthFailure, Unit>? failureOrSuccess;
+
+        final isEmailValid = state.emailAddress.isValid();
+        final isPasswordValid = state.password.isValid();
+        final isNameValid = state.name.isValid();
+        final isPhoneValid = state.phone.isValid();
+
+        if (isEmailValid && isPasswordValid && isNameValid && isPhoneValid) {
+          yield state.copyWith(
+            isSubmitting: true,
+            authFailureOrSuccessOption: none(),
+          );
+          failureOrSuccess = await _authRepo.registerWithEmailAndPassword(
+              emailAddress: state.emailAddress,
+              password: state.password,
+              name_lastname: state.name,
+              phone_number: state.phone);
+        } else {
+          failureOrSuccess =
+              left(const IAuthFailure.invalidEmailAndPasswordCombination());
+        }
+
+        yield state.copyWith(
+          isSubmitting: false,
+          showErrorMessages: true,
+          authFailureOrSuccessOption: optionOf(failureOrSuccess),
+        );
+      },
+      registerWithFirebase: (e) async* {
+        yield* _performActionOnAuthFacadeWithEmailAndPassword(
+            _authRepo.registerWithFirebase);
       },
       signInWithEmailAndPasswordPressed: (e) async* {
         yield* _performActionOnAuthFacadeWithEmailAndPassword(
@@ -51,9 +93,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         Either<IAuthFailure, Unit>? failureOrSuccess;
         try {
           failureOrSuccess = await _authRepo.signInWithGoogle();
-        } on PlatformException catch (e) {
-          print("dsd");
-        }
+        } on PlatformException catch (e) {}
 
         yield state.copyWith(
           isSubmitting: false,
@@ -89,9 +129,11 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
       failureOrSuccess =
           left(const IAuthFailure.invalidEmailAndPasswordCombination());
     }
+
     yield state.copyWith(
       isSubmitting: false,
       showErrorMessages: true,
+      isAuth: failureOrSuccess.fold((l) => false, (r) => true),
       authFailureOrSuccessOption: optionOf(failureOrSuccess),
     );
   }

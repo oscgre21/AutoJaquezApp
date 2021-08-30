@@ -1,5 +1,7 @@
 import 'package:autojaquezapp/domain/auth/model/user_data.dart';
-import 'package:autojaquezapp/domain/core/IRequestApi.dart';
+import 'package:autojaquezapp/boundary/core/helpers/IRequestApi.dart';
+import 'package:autojaquezapp/domain/core/value_objects.dart';
+import 'package:autojaquezapp/domain/register/UserRegister.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../domain/auth/auth_failure.dart';
@@ -17,8 +19,10 @@ class FirebaseAuthImpl extends IAuthRepository {
   FirebaseAuthImpl(this._firebaseAuth, this._googleSignIn, this._httprequest);
 
   @override
-  Future<Either<IAuthFailure, Unit>> registerWithEmailAndPassword(
-      {required EmailAddress emailAddress, required Password password}) async {
+  Future<Either<IAuthFailure, Unit>> registerWithFirebase({
+    required EmailAddress emailAddress,
+    required Password password,
+  }) async {
     final EmailAddressStr = emailAddress.getOrCrash();
     final PasswordStr = emailAddress.getOrCrash();
 
@@ -35,6 +39,38 @@ class FirebaseAuthImpl extends IAuthRepository {
         return left(const IAuthFailure.serverError());
       }
     }
+  }
+
+  @override
+  Future<Either<IAuthFailure, Unit>> registerWithEmailAndPassword({
+    required EmailAddress emailAddress,
+    required Password password,
+    required PhoneNumber phone_number,
+    required InputName name_lastname,
+  }) async {
+    var data = await _httprequest.post(
+        "/register",
+        UserRegister(
+            name: name_lastname.getOrCrash(),
+            phone: phone_number.getOrCrash(),
+            email: emailAddress.getOrCrash(),
+            password: password.getOrCrash()));
+
+    return left(const IAuthFailure.serverError());
+    /*
+      try {
+        await _firebaseAuth.createUserWithEmailAndPassword(
+          email: EmailAddressStr,
+          password: PasswordStr,
+        );
+        return right(unit);
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'ERROR_EMAIL_ALREADY_IN_USE') {
+          return left(const IAuthFailure.emailAlreadyInUse());
+        } else {
+          return left(const IAuthFailure.serverError());
+        }
+      }*/
   }
 
   @override

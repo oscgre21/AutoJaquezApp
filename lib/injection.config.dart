@@ -12,10 +12,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'application/auth/auth_bloc.dart';
 import 'application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'application/register/register_bloc_bloc.dart';
 import 'boundary/core/helpers/http_request.dart';
 import 'boundary/infrastructure/auth/firebase_auth_impl.dart';
 import 'domain/auth/i_auth_repository.dart';
-import 'domain/core/IRequestApi.dart';
+import 'boundary/core/helpers/IRequestApi.dart';
 
 GetIt $initGetIt(
   GetIt get, {
@@ -54,5 +55,12 @@ GetIt $initGetIt(
   get.registerFactory<AuthBloc>(
     () => AuthBloc(get<IAuthRepository>()),
   );
+  get.registerFactory<RegisterBlocBloc>(
+    () => RegisterBlocBloc(
+      get<IRequestApi>(),
+      get<IAuthRepository>(),
+    ),
+  );
+
   return get;
 }

@@ -31,17 +31,18 @@ class _TabMenuWidgetState extends State<HomePageTab> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         state.map(
-            initial: (_) {},
-            authenticated: (_) async {
-              print("authenticated done");
-              //  await Navigator.of(context).pushNamed(AppRoutes.homePage);
-            },
-            unauthenticated: (_) async {
-              print("unauthenticated done");
-              await Navigator.of(context).pushNamed(AppRoutes.loginPage);
-            });
+          (value) => () {},
+          authenticated: (_) async {
+            print("authenticated done");
+            //  await Navigator.of(context).pushNamed(AppRoutes.homePage);
+          },
+          unauthenticated: (_) async {
+            print("unauthenticated done");
+            await Navigator.of(context).pushNamed(AppRoutes.loginPage);
+          },
+        );
       },
       child: Container(
         color: Colors.white,

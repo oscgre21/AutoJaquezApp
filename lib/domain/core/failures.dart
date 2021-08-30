@@ -15,4 +15,13 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.passwordIsEmpty({
     required T failedValue,
   }) = PasswordIsEmpty<T>;
+  const factory ValueFailure.invalidPhoneNumber({
+    required T failedValue,
+  }) = InvalidPhoneNumber<T>;
+  const factory ValueFailure.shortInputText({
+    required T failedValue,
+  }) = ShortInputText<T>;
+  const factory ValueFailure.inputIsEmpty({
+    required T failedValue,
+  }) = InputIsEmpty<T>;
 }

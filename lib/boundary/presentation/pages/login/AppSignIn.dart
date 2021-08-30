@@ -1,12 +1,15 @@
 import 'package:another_flushbar/flushbar.dart';
-import '../../../../application/auth/sign_in_form/sign_in_form_bloc.dart';
-import '../../../../application/order/OrderProviderNotifier.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:autojaquezapp/application/auth/auth_bloc.dart';
+import 'package:autojaquezapp/boundary/core/util/Constants.dart';
+import 'package:autojaquezapp/boundary/presentation/routes/app_router.dart';
 
-import 'AppSingUp.dart';
+import '../../../../application/auth/sign_in_form/sign_in_form_bloc.dart';
+import '../../../../application/order/OrderProviderNotifier.dart';
+import '../../../../injection.dart';
 
 /*
 class AppSignIn extends StatefulWidget {
@@ -15,15 +18,19 @@ class AppSignIn extends StatefulWidget {
 }*/
 
 class AppSignIn extends StatelessWidget {
-  late OrderProviderNotifier appState;
-
   final username = TextEditingController();
+  late SignInFormBloc signIn;
+
+  AppSignIn() {
+    signIn = getIt<SignInFormBloc>(); // Provider.of<AuthBloc>(context);
+  }
 
   @override
   Widget build(BuildContext context) {
-    appState = Provider.of<OrderProviderNotifier>(context);
+    // appState = Provider.of<OrderProviderNotifier>(context);
 
     return BlocConsumer<SignInFormBloc, SignInFormState>(
+      bloc: signIn,
       listener: (context, state) {
         state.authFailureOrSuccessOption.fold(
           () {},
@@ -40,8 +47,9 @@ class AppSignIn extends StatelessWidget {
                 duration: Duration(seconds: 3),
               ).show(context);
             },
-            (_) {
-              Navigator.pop(context);
+            (_) async {
+              await Navigator.of(context).popAndPushNamed(AppRoutes.homePage);
+              // Navigator.pop(context);
             },
           ),
         );
@@ -53,12 +61,34 @@ class AppSignIn extends StatelessWidget {
   }
 
   Widget _scaf(BuildContext context, SignInFormState state) {
-    if (appState.isAuth) {
-      // Navigator.pop(context);
-    }
-
     return Scaffold(
-      body: _cfdata(context, state),
+      body: Stack(
+        children: [
+          Positioned(
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: (MediaQuery.of(context).size.height) * 25 / 100,
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.black,
+                image: DecorationImage(
+                    image: AssetImage("assets/images/barbershop_cover.jpg"),
+                    fit: BoxFit.cover),
+              ),
+            ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            top: (MediaQuery.of(context).size.height) * 25 / 100,
+            bottom: 0,
+            child: _cfdata(context, state),
+          )
+        ],
+      ),
     );
   }
 
@@ -67,13 +97,14 @@ class AppSignIn extends StatelessWidget {
     double defaultFontSize = 14;
     double defaultIconSize = 17;
 
-    SignInFormBloc signIn = Provider.of<SignInFormBloc>(context);
-
     return Container(
-      padding: EdgeInsets.only(left: 20, right: 20, top: 35, bottom: 30),
+      padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 30),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30.0),
+        color: Colors.white,
+      ),
       width: double.infinity,
       height: double.infinity,
-      color: Colors.white70,
       child: Stack(children: [
         Form(
           autovalidateMode: AutovalidateMode.always,
@@ -84,14 +115,12 @@ class AppSignIn extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Container(
-                        width: 120,
-                        height: 120,
-                        alignment: Alignment.center,
-                        child: Image.asset("assets/images/ic_app_icon.jpg"),
+                      Text(
+                        "Pujols BarberShop",
+                        style: kTitleStyle,
                       ),
                       SizedBox(
-                        height: 15,
+                        height: 40,
                       ),
                       TextFormField(
                         validator: (_) => signIn.state.emailAddress.value.fold(
@@ -115,7 +144,7 @@ class AppSignIn extends StatelessWidget {
                           ),
                           filled: true,
                           prefixIcon: Icon(
-                            Icons.phone,
+                            Icons.person,
                             color: Color(0xFF666666),
                             size: defaultIconSize,
                           ),
@@ -124,7 +153,7 @@ class AppSignIn extends StatelessWidget {
                               color: Color(0xFF666666),
                               fontFamily: defaultFontFamily,
                               fontSize: defaultFontSize),
-                          hintText: "Telefono",
+                          hintText: "Correo electronico",
                         ),
                       ),
                       SizedBox(
@@ -174,57 +203,26 @@ class AppSignIn extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        child: Text(
-                          "Olvidé mi contraseña?",
-                          style: TextStyle(
-                            color: Color(0xFF666666),
-                            fontFamily: defaultFontFamily,
-                            fontSize: defaultFontSize,
-                            fontStyle: FontStyle.normal,
-                          ),
-                          textAlign: TextAlign.end,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
+                        height: 20,
                       ),
                       signIn.state.isSubmitting
                           ? CircularProgressIndicator()
-                          : Container(
-                              width: double.infinity,
-                              child: RaisedButton(
-                                padding: EdgeInsets.all(17.0),
-                                onPressed: () {
-                                  signIn.add(const SignInFormEvent
-                                      .signInWithEmailAndPasswordPressed());
-                                },
-                                child: Text(
-                                  "Acceder",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontFamily: 'Poppins-Medium.ttf',
-                                  ),
-                                  textAlign: TextAlign.center,
+                          : Column(
+                              children: [
+                                _bottom_LoginWithEmail(),
+                                SizedBox(
+                                  height: 15.0,
                                 ),
-                                color: Color(0xFFBC1F26),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        new BorderRadius.circular(15.0),
-                                    side: BorderSide(color: Color(0xFFBC1F26))),
-                              ),
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color(0xFFF2F3F7)),
+                                _bottom_LoginWithGmail(),
+                              ],
                             ),
                       SizedBox(
                         height: 10,
                       ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 20.0,
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
@@ -244,14 +242,10 @@ class AppSignIn extends StatelessWidget {
                           ),
                         ),
                         InkWell(
-                          onTap: () => {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AppSingUp()),
-                            )
-                          },
+                          onTap: () => Navigator.of(context)
+                              .popAndPushNamed(AppRoutes.SignUp),
                           child: Container(
+                            height: 20,
                             child: Text(
                               "Registrate!",
                               style: TextStyle(
@@ -271,22 +265,98 @@ class AppSignIn extends StatelessWidget {
             ],
           ),
         ),
-        Container(
-          width: 30.0,
-          height: 30.0,
-          child: InkWell(
-            child: Container(
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Icon(Icons.close),
-              ),
+      ]),
+    );
+  }
+
+  Widget _bottom_LoginWithGmail() {
+    return Container(
+      width: double.infinity,
+      child: RaisedButton(
+        padding: EdgeInsets.all(17.0),
+        onPressed: () {
+          signIn.add(const SignInFormEvent.signInWithGooglePressed());
+        },
+        child: Row(
+          children: [
+            SizedBox(
+              width: 20,
             ),
-            onTap: () {
-              Navigator.pop(context);
-            },
+            Container(
+                width: 20,
+                child: Image.network(
+                  'http://pngimg.com/uploads/google/google_PNG19635.png',
+                  fit: BoxFit.cover,
+                )),
+            SizedBox(
+              width: 20,
+            ),
+            Text(
+              "Conectar con Google",
+              style: TextStyle(
+                color: Colors.black45,
+                fontSize: 15,
+                fontFamily: 'Poppins-Medium.ttf',
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+        color: Colors.white,
+        shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(5.0),
+          side: BorderSide(
+            color: Colors.black12,
           ),
         ),
-      ]),
+      ),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Color(0xFFF2F3F7),
+      ),
+    );
+  }
+
+  Widget _bottom_LoginWithEmail() {
+    return Container(
+      width: double.infinity,
+      child: RaisedButton(
+        padding: EdgeInsets.all(17.0),
+        onPressed: () {
+          signIn.add(const SignInFormEvent.signInWithEmailAndPasswordPressed());
+        },
+        child: Row(
+          children: [
+            Icon(
+              Icons.email,
+              color: Colors.white,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              "Conectar con mi correo electronico",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontFamily: 'Poppins-Medium.ttf',
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+        color: Colors.blueGrey[700],
+        shape: RoundedRectangleBorder(
+          borderRadius: new BorderRadius.circular(5.0),
+          side: BorderSide(
+            color: Colors.black12,
+          ),
+        ),
+      ),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Color(0xFFF2F3F7),
+      ),
     );
   }
 }

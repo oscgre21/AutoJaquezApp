@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:autojaquezapp/domain/core/IRequestApi.dart';
+import 'package:autojaquezapp/boundary/core/helpers/IRequestApi.dart';
 
 import '../util/Urls.dart';
 import '../../../domain/core/request/client_response.dart';
