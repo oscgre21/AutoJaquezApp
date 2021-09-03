@@ -44,8 +44,12 @@ class RegisterBlocBloc extends Bloc<RegisterBlocEvent, RegisterBlocState> {
         );
       },
       register: (_) async* {
-        //_register.registerWithEmailAndPassword(
-        //  emailAddress: emailAddress, password: password);
+        _register.registerWithEmailAndPassword(
+          emailAddress: state.emailAddress,
+          name_lastname: state.name,
+          password: state.password,
+          phone_number: state.phone,
+        );
       },
     );
   }

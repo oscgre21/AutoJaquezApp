@@ -58,7 +58,7 @@ class InputName extends ValueObject<String> {
 
   factory InputName(String input) {
     assert(input != null);
-    return InputName._(validateLength(input, 7));
+    return InputName._(validateLength(input, 4));
   }
   const InputName._(this.value) : assert(value != null);
 }

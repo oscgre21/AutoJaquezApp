@@ -1,5 +1,4 @@
 import 'package:autojaquezapp/boundary/presentation/pages/home/home_client/HomeForClientPage.dart';
-import 'package:autojaquezapp/boundary/presentation/pages/home/home_page_tab.dart';
 import 'package:autojaquezapp/boundary/presentation/pages/login/AppSignIn.dart';
 import 'package:autojaquezapp/boundary/presentation/pages/login/AppSingUp.dart';
 import 'package:autojaquezapp/boundary/presentation/pages/splash/splash_screen_page.dart';

@@ -8,10 +8,6 @@ import 'package:provider/provider.dart';
 
 import 'application/auth/auth_bloc.dart';
 import 'application/auth/sign_in_form/sign_in_form_bloc.dart';
-import 'application/order/OrderProviderNotifier.dart';
-import 'application/register/register_bloc_bloc.dart';
-import 'application/shipping/ShippingProviderNotifier.dart';
-import 'boundary/core/SessionProvider.dart';
 import 'boundary/presentation/routes/app_router.dart';
 import 'injection.dart';
 
@@ -30,22 +26,10 @@ class MyApp extends StatelessWidget {
         BlocProvider.value(
           value: getIt<SignInFormBloc>(),
         ),
-        BlocProvider.value(
-          value: getIt<RegisterBlocBloc>(),
-        ),
         BlocProvider(
           create: (context) =>
               getIt<AuthBloc>()..add(const AuthEvent.authCheckRequest()),
         ),
-        ChangeNotifierProvider.value(
-          value: OrderProviderNotifier(),
-        ),
-        ChangeNotifierProvider.value(
-          value: ShippingProviderNotifier(),
-        ),
-        ChangeNotifierProvider.value(
-          value: SessionProvider(),
-        )
       ],
       child: MaterialApp(
         initialRoute: AppRoutes.splashPage,

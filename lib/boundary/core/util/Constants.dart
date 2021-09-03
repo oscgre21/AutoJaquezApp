@@ -12,6 +12,8 @@ const kIndigo = Color(0xFF000A45);
 const kBlack = Color(0xFF4C4C4C);
 const kGrey = Color(0xFFACACAC);
 
+const KArray = [kPurple, kYellow, kGreen, kPink, kIndigo, kBlack, kGrey];
+
 var kTitleStyle = GoogleFonts.roboto(
   color: kBlack,
   fontSize: 18.0,

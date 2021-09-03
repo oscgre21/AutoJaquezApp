@@ -1,5 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
-import 'package:autojaquezapp/application/register/register_bloc_bloc.dart';
+import 'package:autojaquezapp/application/auth/sign_in_form/sign_in_form_bloc.dart';
+
 import 'package:autojaquezapp/boundary/presentation/routes/app_router.dart';
 import 'package:autojaquezapp/injection.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -9,9 +10,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'AppSignIn.dart';
 
 class AppSingUp extends StatelessWidget {
-  late RegisterBlocBloc _register;
+  late SignInFormBloc _register;
   AppSingUp() {
-    _register = getIt<RegisterBlocBloc>();
+    _register = getIt<SignInFormBloc>();
   }
   @override
   Widget build(BuildContext context) {
@@ -71,7 +72,7 @@ class AppSingUp extends StatelessWidget {
               right: 0,
               bottom: 0,
               child: ListView(children: [
-                BlocConsumer<RegisterBlocBloc, RegisterBlocState>(
+                BlocConsumer<SignInFormBloc, SignInFormState>(
                   bloc: _register,
                   listener: (context, state) {
                     state.authFailureOrSuccessOption.fold(
@@ -90,8 +91,8 @@ class AppSingUp extends StatelessWidget {
                           ).show(context);
                         },
                         (_) async {
-                          // await Navigator.of(context)
-                          //   .popAndPushNamed(AppRoutes.homePage);
+                          await Navigator.of(context)
+                              .popAndPushNamed(AppRoutes.homePage);
                           // Navigator.pop(context);
                         },
                       ),
@@ -132,11 +133,11 @@ class AppSingUp extends StatelessWidget {
                         orElse: () => null,
                         inputIsEmpty: (_) => "Nombre no debe estar vacio",
                         shortInputText: (_) =>
-                            "El campo de nombre debe de tener más de 3 letras"),
+                            "El campo de nombre debe de tener más de 7 letras"),
                     (r) => null,
                   ),
                   onChanged: (val) => _register.add(
-                    RegisterBlocEvent.nameChanged(val),
+                    SignInFormEvent.nameChanged(val),
                   ),
                   showCursor: true,
                   decoration: InputDecoration(
@@ -174,7 +175,7 @@ class AppSingUp extends StatelessWidget {
                     (r) => null,
                   ),
                   onChanged: (val) => _register.add(
-                    RegisterBlocEvent.phoneChanged(val),
+                    SignInFormEvent.phoneChanged(val),
                   ),
                   showCursor: true,
                   decoration: InputDecoration(
@@ -211,7 +212,7 @@ class AppSingUp extends StatelessWidget {
                     (r) => null,
                   ),
                   onChanged: (val) => _register.add(
-                    RegisterBlocEvent.emailChanged(val),
+                    SignInFormEvent.emailChanged(val),
                   ),
                   showCursor: true,
                   decoration: InputDecoration(
@@ -247,7 +248,8 @@ class AppSingUp extends StatelessWidget {
                         child: RaisedButton(
                           padding: EdgeInsets.all(17.0),
                           onPressed: () {
-                            _register.add(const RegisterBlocEvent.register());
+                            _register.add(const SignInFormEvent
+                                .registerWithEmailAndPasswordPressed());
                           },
                           child: Text(
                             "Registrarse",

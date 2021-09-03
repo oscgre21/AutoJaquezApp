@@ -13,10 +13,10 @@ abstract class RegisterBlocState with _$RegisterBlocState {
   }) = _RegisterBlocState;
 
   factory RegisterBlocState.initial() => RegisterBlocState(
-        emailAddress: EmailAddress(''),
-        name: InputName(""),
-        phone: PhoneNumber(""),
-        password: Password(""),
+        emailAddress: EmailAddress('x@x.c'),
+        name: InputName("miguel angel test"),
+        phone: PhoneNumber("8093334444"),
+        password: Password("123456"),
         showErrorMessages: false,
         isSubmitting: false,
         authFailureOrSuccessOption: none(),

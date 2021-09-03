@@ -16,8 +16,8 @@ abstract class SignInFormState with _$SignInFormState {
   factory SignInFormState.initial() => SignInFormState(
         emailAddress: EmailAddress('txt@t.com'),
         password: Password('123456'),
-        phone: PhoneNumber(""),
-        name: InputName(""),
+        phone: PhoneNumber("8093334444"),
+        name: InputName("Carlos Almonte r"),
         showErrorMessages: false,
         isSubmitting: false,
         isAuth: false,

@@ -1,15 +1,16 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:autojaquezapp/application/auth/auth_bloc.dart';
-import 'package:autojaquezapp/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:autojaquezapp/application/product/product_bloc.dart';
 import 'package:autojaquezapp/boundary/core/util/Constants.dart';
 import 'package:autojaquezapp/boundary/presentation/pages/home/widget/CategoryCard.dart';
 import 'package:autojaquezapp/boundary/presentation/pages/home/widget/CustomListTitleWidget.dart';
 import 'package:autojaquezapp/boundary/presentation/routes/app_router.dart';
 import 'package:autojaquezapp/domain/entity/products/Category_model.dart';
+import 'package:autojaquezapp/domain/products/entity/Product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
-import 'package:provider/provider.dart';
 
 import '../../../../../injection.dart';
 
@@ -22,15 +23,17 @@ class HomeForClientPage extends StatefulWidget {
 
 class _HomeForClientPageState extends State<HomeForClientPage> {
   late AuthBloc signIn;
+  late ProductBloc ourServices;
 
   _HomeForClientPageState() {
-    signIn = getIt<AuthBloc>(); // Provider.of<AuthBloc>(context);
+    signIn = getIt<AuthBloc>();
+    ourServices = getIt<ProductBloc>();
   }
 
   @override
   Widget build(BuildContext context) {
-    signIn.add(const AuthEvent.authCheckRequest());
-
+    //signIn.add(const AuthEvent.authCheckRequest());
+    ourServices.add(const ProductEvent.getProduct());
     return BlocConsumer<AuthBloc, AuthState>(
       bloc: signIn,
       listener: (context, state) {
@@ -134,19 +137,7 @@ class _HomeForClientPageState extends State<HomeForClientPage> {
               SizedBox(
                 height: 25.0,
               ),
-              Container(
-                width: double.infinity,
-                height: 100.0,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    shrinkWrap: true,
-                    physics: ScrollPhysics(),
-                    itemCount: categoryList.length,
-                    itemBuilder: (context, index) {
-                      var category = categoryList[index];
-                      return CategoryCard(category: category);
-                    }),
-              ),
+              CustomListBloc(),
               SizedBox(
                 height: 25.0,
               ),
@@ -155,6 +146,60 @@ class _HomeForClientPageState extends State<HomeForClientPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget CustomListBloc() {
+    bool isLoading = false;
+    List<Product> products = [];
+    return BlocConsumer<ProductBloc, ProductState>(
+      bloc: ourServices,
+      listener: (context, ProductState state) {
+        state.map(
+          (value) => null,
+          loadInProcess: (_) {
+            isLoading = true;
+          },
+          loadSuccessOrFail: (data) {
+            products = data.data.fold((l) {
+              /* If there are some errors then return empty array */
+              Flushbar(
+                message: l.map(
+                  productNotLoadFailure: (err) => err.response.map(
+                    serverError: (server) => server.response.mensaje,
+                    unauthorized: (server) {
+                      Navigator.of(context)
+                          .popAndPushNamed(AppRoutes.loginPage);
+                      return server.response.mensaje;
+                    },
+                  ),
+                ),
+                duration: Duration(seconds: 3),
+              ).show(context);
+              return [];
+            }, (r) => r);
+            isLoading = false;
+          },
+        );
+      },
+      builder: (context, state) {
+        return isLoading
+            ? CircularProgressIndicator()
+            : Container(
+                width: double.infinity,
+                height: 100.0,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    shrinkWrap: true,
+                    physics: ScrollPhysics(),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return CategoryCard(
+                        product: products[index],
+                      );
+                    }),
+              );
+      },
     );
   }
 }

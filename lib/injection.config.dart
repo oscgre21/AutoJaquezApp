@@ -12,11 +12,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'application/auth/auth_bloc.dart';
 import 'application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'application/product/product_bloc.dart';
 import 'application/register/register_bloc_bloc.dart';
 import 'boundary/core/helpers/http_request.dart';
 import 'boundary/infrastructure/auth/firebase_auth_impl.dart';
+import 'boundary/infrastructure/products/productImpl.dart';
 import 'domain/auth/i_auth_repository.dart';
 import 'boundary/core/helpers/IRequestApi.dart';
+import 'domain/products/IProductRepository.dart';
 
 GetIt $initGetIt(
   GetIt get, {
@@ -36,19 +39,12 @@ GetIt $initGetIt(
         get<IRequestApi>(),
       ));
 
-/*  final firebaseInjectableModule = _$FirebaseInjectableModule();
-  gh.lazySingleton<FirebaseAuth>(() => firebaseInjectableModule.firebaseAuth);
-  gh.lazySingleton<FirebaseFirestore>(() => firebaseInjectableModule.firestore);
-  gh.lazySingleton<GoogleSignIn>(() => firebaseInjectableModule.googleSignIn);
-  gh.lazySingleton<IAuthFacade>(
-      () => FirebaseAuthFacade(get<FirebaseAuth>(), get<GoogleSignIn>()));
-  gh.lazySingleton<INoteRepository>(
-      () => NoteRepository(get<FirebaseFirestore>()));
-  gh.factory<NoteActorBloc>(() => NoteActorBloc(get<INoteRepository>()));
-  gh.factory<NoteFormBloc>(() => NoteFormBloc(get<INoteRepository>()));
-  gh.factory<NoteWatcherBloc>(() => NoteWatcherBloc(get<INoteRepository>()));
-  gh.factory<SignInFormBloc>(() => SignInFormBloc(get<IAuthFacade>()));
-  gh.factory<AuthBloc>(() => AuthBloc(get<IAuthFacade>()));*/
+  gh.lazySingleton<IProductRepository>(
+    () => ProductImpl(
+      get<IRequestApi>(),
+    ),
+  );
+
   get.registerFactory<SignInFormBloc>(
     () => SignInFormBloc(get<IAuthRepository>()),
   );
@@ -59,6 +55,11 @@ GetIt $initGetIt(
     () => RegisterBlocBloc(
       get<IRequestApi>(),
       get<IAuthRepository>(),
+    ),
+  );
+  get.registerFactory<ProductBloc>(
+    () => ProductBloc(
+      get<IProductRepository>(),
     ),
   );
 
